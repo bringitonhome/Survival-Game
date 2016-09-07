@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1473232484 source:d:\keep\c++ programs\survival game\main.cpp
+	<iostream>
+	<SFML/Window.hpp>
+	<SFML/Graphics.hpp>
+	<SFML/OpenGL.hpp>
+	<math.h>
+	<ctime>
+	<list>
+
