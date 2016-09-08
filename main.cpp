@@ -8,13 +8,13 @@
 #include <ctime>
 #include <list>
 
-#define WW 1920
-#define WH 1080
+#define WW 1000
+#define WH 600
 #define SCALE 4
 #define BASESPEED 5
 
 #define DETECTRANGE 200
-#define FIRERATE 200
+#define FIRERATE 0
 
 #define WANDERRATE 5000
 
@@ -44,6 +44,9 @@ public:
     }
     float getLookAngle(){
         return lookAngle;
+    }
+    float getSpeed(){
+        return speed;
     }
 
 protected:
@@ -140,6 +143,14 @@ class Enemy : public Character{
 public:
     Enemy();
 
+    void killZombie(){
+        alive = false;
+    }
+
+    bool getAlive(){
+        return alive;
+    }
+
     void setSpeed(){
         speed = (BASESPEED/2)*(1+0.5*chasing)/((1 + wounded)*(1 + 4*wandering)*(1 + grabbing));
     }
@@ -201,6 +212,8 @@ private:
     bool wounded;
     bool wandering;
 
+    bool alive;
+
     float xDirection;
     float yDirection;
 };
@@ -219,6 +232,7 @@ Enemy::Enemy(){
     chasing = false;
     grabbing = false;
     wounded = false;
+    alive = true;
 
 
 }
@@ -242,11 +256,12 @@ public:
         bulletSpeed = 2*BASESPEED;
     }
 
-    bool checkForImpact(list<Enemy*> enemy_list){
+    bool checkForImpact(list<Enemy*>* enemy_list){
         //impact = (*enemy).getSprite().getGlobalBounds().intersects(sprite.getGlobalBounds());
-        for(list<Enemy*>::iterator it = enemy_list.begin(); it != enemy_list.end(); ++it){
+        for(list<Enemy*>::iterator it = (*enemy_list).begin(); it != (*enemy_list).end(); ++it){
             impact = (sprite.getGlobalBounds().intersects((*(*it)).getSprite().getGlobalBounds()));
             if(impact == true){
+                (*enemy_list).erase(it);
                 return impact;
             }
         }
@@ -258,6 +273,7 @@ public:
     }
     float getPositionY(){
         return yPos;
+
     }
 
     float getImpactAngle(){
@@ -374,7 +390,7 @@ int main()
     time_t currentTime;
     time_t timeOfPreviousBullet = 0;
 
-    int numEnemies = 100;
+    int numEnemies = 5000;
 
     for(int enemy = 0; enemy < numEnemies; enemy++){
         enemy_list.push_back(new Enemy);
@@ -405,8 +421,8 @@ int main()
 
         hero.moveChar(&window);
 
-        for(list<Enemy*>::iterator it=enemy_list.begin(); it != enemy_list.end(); ++it){
-            (*(*it)).moveZombie(&hero);
+        for(list<Enemy*>::iterator it1 = enemy_list.begin(); it1 != enemy_list.end(); ++it1){
+            (*(*it1)).moveZombie(&hero);
         }
 
 
@@ -415,10 +431,9 @@ int main()
         for(list<Bullet*>::iterator it=bullet_list.begin(); it != bullet_list.end(); ++it){
             bool impact = false;
 
-            impact = (*(*it)).checkForImpact(enemy_list);
+            impact = (*(*it)).checkForImpact(&enemy_list);
 
             if((*(*it)).getPositionX() < -100 || (*(*it)).getPositionX() > WW + 100 || (*(*it)).getPositionY() < -100 || (*(*it)).getPositionY() > WH + 100 || impact == true){
-
                 it = bullet_list.erase(it);
             }
             else{
@@ -426,6 +441,8 @@ int main()
                 window.draw((*(*it)).getSprite());
             }
         }
+
+
 
         window.draw(hero.getSprite());
 
