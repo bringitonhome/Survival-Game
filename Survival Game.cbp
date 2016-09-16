@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,7 +34,20 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Bullet.h" />
+		<Unit filename="include/Command.h" />
+		<Unit filename="include/Constants.h" />
+		<Unit filename="include/Enemy.h" />
+		<Unit filename="include/Entity.h" />
+		<Unit filename="include/Hero.h" />
+		<Unit filename="include/Weapons.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Bullet.cpp" />
+		<Unit filename="src/Command.cpp" />
+		<Unit filename="src/Enemy.cpp" />
+		<Unit filename="src/Entity.cpp" />
+		<Unit filename="src/Hero.cpp" />
+		<Unit filename="src/Weapons.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
