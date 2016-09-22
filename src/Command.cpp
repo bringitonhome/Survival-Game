@@ -2,15 +2,15 @@
 #include <ctime>
 #include <SFML/Window.hpp>
 
-void Command::checkUserInput(sf::RenderWindow* window){
+void Command::checkUserInput(sf::RenderWindow* window, sf::Event* event){
 
 
     //Check Mouse
     int mouseX = sf::Mouse::getPosition(*window).x;
     int mouseY = sf::Mouse::getPosition(*window).y;
     mouseXY = sf::Vector2i(mouseX, mouseY);
-
     commands[LCLICK] = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    scroll = (*event).mouseWheelScroll.delta;
 
     //Check Keyboard
     commands[WKEY] = sf::Keyboard::isKeyPressed(sf::Keyboard::W);
@@ -27,4 +27,8 @@ bool* Command::getCommands(){
 
 sf::Vector2i Command::getMouseXY(){
     return mouseXY;
+}
+
+int Command::getScroll(){
+    return scroll;
 }

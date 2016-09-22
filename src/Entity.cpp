@@ -46,3 +46,22 @@ float Entity::getOrientation(){
 float Entity::getSpeed(){
     return speed;
 }
+
+void Entity::causeDamage(int damage){
+    health -= damage;
+    if(health <= 0){
+        health = 0;
+        alive  = false;
+    }
+}
+int Entity::getHealth(){
+    return health;
+}
+
+bool Entity::getAlive(){
+    return alive;
+}
+
+int Entity::getDamage(){
+    return damage;
+}

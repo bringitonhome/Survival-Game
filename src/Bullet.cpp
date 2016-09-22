@@ -10,11 +10,11 @@ using namespace std;
 Bullet::Bullet(sf::Texture* texture, float spawnX, float spawnY, float angle){
 
     //Sprite initialization
-    spriteOriginX = 5;
-    spriteOriginY = 35;
-    spriteWidth = 2;
-    spriteHeight = 1;
-    sprite.setOrigin(0, 0.5);
+    spriteOriginX = 130;
+    spriteOriginY = 10;
+    spriteWidth = 4;
+    spriteHeight = 2;
+    sprite.setOrigin(spriteWidth/2, spriteHeight/2);
 
     //Position & Orientation initialization
     xPos = spawnX;

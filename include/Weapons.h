@@ -10,13 +10,16 @@ using namespace std;
 class Weapons : public Entity
 {
     public:
-        Weapons(sf::Texture*, string);
+        Weapons(sf::Texture*, int);
         void followCharacter(Hero*);
         float getFireRate();
         float getBulletSpawnDistance();
+        bool getEquipped();
+        bool setEquipped(bool);
     protected:
         float firerate;
         float bulletSpawnDistance;
+        bool equipped;
     private:
 };
 

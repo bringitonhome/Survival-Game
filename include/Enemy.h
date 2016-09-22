@@ -24,8 +24,6 @@ private:
     bool wounded;
     bool wandering;
 
-    bool alive;
-
     float xDirection;
     float yDirection;
 

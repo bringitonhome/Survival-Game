@@ -7,11 +7,11 @@
 //Constructor
 Hero::Hero(sf::Texture* texture){
     //Sprite Info
-    spriteOriginX = 5;
-    spriteOriginY = 5;
-    spriteWidth = 11;
-    spriteHeight = 11;
-    sprite.setOrigin(5.5, 5.5);
+    spriteOriginX = 10;
+    spriteOriginY = 10;
+    spriteWidth = 32;
+    spriteHeight = 32;
+    sprite.setOrigin(spriteWidth/2, spriteHeight/2);
 
     //Position & Orientation initialization
     xPos = WW/4;
@@ -25,6 +25,10 @@ Hero::Hero(sf::Texture* texture){
 
     grabbed, speedIncrease, speedDecrease = false;
     setSprite(texture);
+
+    //Gameplay
+    health = 100;
+    alive = true;
 }
 
 //Set Function

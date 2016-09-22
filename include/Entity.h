@@ -10,6 +10,7 @@ class Entity
         //Set Functions
         void setSprite(sf::Texture*);
         void setSpeed();
+        void causeDamage(int);
 
         //Get Functions
         sf::Sprite getSprite();
@@ -20,6 +21,10 @@ class Entity
 
         int getSpriteWidth();
         int getSpriteHeight();
+        int getHealth();
+
+        bool getAlive();
+        int getDamage();
 
     protected:
         //Sprite info
@@ -39,6 +44,10 @@ class Entity
         bool speedDecrease;
 
         float typeMult;
+
+        int health;
+        bool alive;
+        int damage;
 
     private:
 };
